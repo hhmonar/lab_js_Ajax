@@ -45,21 +45,29 @@ function contarVocales() {
 }
 
 function mostrarContenido() {
-  const url = document.getElementById('url').value || window.location.href;
+  const urlInput = document.getElementById('url');
+  const url = urlInput.value.trim() || "https://jsonplaceholder.typicode.com/posts/1";
+
+  if (urlInput.value.trim() === "") {
+    urlInput.value = url; // actualizar el campo si estaba vacío
+  }
+
   const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
 
   xhr.onreadystatechange = function () {
     const estados = ["No iniciada", "Conexión establecida", "Recibiendo", "Completada"];
-    document.getElementById("estado-peticion").textContent = 'Estado: \${estados[xhr.readyState] || "Desconocido"}';
+    document.getElementById("estado-peticion").textContent = `Estado: ${estados[xhr.readyState] || "Desconocido"}`;
 
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         document.getElementById("contenido").textContent = xhr.responseText;
-        document.getElementById("codigo-respuesta").textContent = "Código: \${xhr.status} \${xhr.statusText}";
+        document.getElementById("codigo-respuesta").textContent = `Código: ${xhr.status} ${xhr.statusText}`;
         document.getElementById("cabeceras").textContent = xhr.getAllResponseHeaders();
       } else {
-        document.getElementById("contenido").textContent = "Error al cargar el contenido.";
+        document.getElementById("contenido").textContent = "⚠️ Error: No se pudo cargar la URL (¿CORS?). Prueba con una API pública.";
+        document.getElementById("codigo-respuesta").textContent = `Código: ${xhr.status} ${xhr.statusText}`;
+        document.getElementById("cabeceras").textContent = "";
       }
     }
   };
