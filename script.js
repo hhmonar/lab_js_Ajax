@@ -3,10 +3,6 @@ function showSection(id) {
   document.getElementById(id).style.display = 'block';
 }
 
-function volver() {
-  document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
-}
-
 function limpiar(campos, salida) {
   campos.split(',').forEach(id => document.getElementById(id).value = '');
   document.getElementById(salida).textContent = '';
@@ -25,22 +21,20 @@ function compararNumeros() {
   document.getElementById('resultadoMayor').textContent = resultado;
 }
 
-function mostrarVocales() {
+function analizarVocales() {
   let frase = document.getElementById('fraseVocales').value.toLowerCase();
-  let vocales = frase.match(/[aeiou]/g);
-  document.getElementById('resultadoVocales').textContent = vocales ? [...new Set(vocales)].join(', ') : "No hay vocales";
-}
-
-function contarVocales() {
-  let frase = document.getElementById('fraseConteo').value.toLowerCase();
+  let vocalesEncontradas = frase.match(/[aeiou]/g);
   let conteo = { a: 0, e: 0, i: 0, o: 0, u: 0 };
-  for (let c of frase) if (conteo.hasOwnProperty(c)) conteo[c]++;
-  let resultado = Object.entries(conteo).map(([v, c]) => `${v}: ${c}`).join(', ');
-  document.getElementById('resultadoConteo').textContent = resultado;
-}
-
-window.onload = () => {
-  document.getElementById('url').value = window.location.href;
+  if (vocalesEncontradas) {
+    for (let v of vocalesEncontradas) conteo[v]++;
+    let distintas = [...new Set(vocalesEncontradas)].join(', ');
+    let resumen = Object.entries(conteo)
+      .filter(([v, c]) => c > 0)
+      .map(([v, c]) => `${v}: ${c}`).join(', ');
+    document.getElementById('resultadoVocales').textContent = `Vocales encontradas: ${distintas}\nConteo: ${resumen}`;
+  } else {
+    document.getElementById('resultadoVocales').textContent = "No se encontraron vocales.";
+  }
 }
 
 function cargarContenido() {
@@ -52,11 +46,9 @@ function cargarContenido() {
     if (xhr.readyState === 4) {
       const respuesta = xhr.responseText;
       try {
-        // Intenta formatear como JSON
         const json = JSON.parse(respuesta);
         document.getElementById('contenido').textContent = JSON.stringify(json, null, 2);
       } catch (e) {
-        // Si no es JSON, muestra como HTML
         document.getElementById('contenido').innerHTML = respuesta;
       }
       document.getElementById('codigo').textContent = xhr.status + ' - ' + xhr.statusText;
@@ -66,7 +58,6 @@ function cargarContenido() {
   };
   xhr.send();
 }
-
 
 function limpiarAjax() {
   document.getElementById('url').value = '';

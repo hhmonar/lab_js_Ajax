@@ -12,8 +12,7 @@
     <div class="buttons">
       <button onclick="showSection('palindromo')">¿Es un Palíndromo?</button>
       <button onclick="showSection('mayor')">Comparar dos Números</button>
-      <button onclick="showSection('vocales')">Detectar Vocales</button>
-      <button onclick="showSection('conteoVocales')">Contar Vocales</button>
+      <button onclick="showSection('vocales')">Analizar Vocales</button>
     </div>
     <div id="palindromo" class="section">
       <input type="text" id="palabra" placeholder="Escribe una palabra">
@@ -31,14 +30,8 @@
     <div id="vocales" class="section">
       <input type="text" id="fraseVocales" placeholder="Escribe una frase">
       <div class="output" id="resultadoVocales"></div>
-      <button onclick="mostrarVocales()">Mostrar Vocales</button>
+      <button onclick="analizarVocales()">Analizar Vocales</button>
       <button onclick="limpiar('fraseVocales','resultadoVocales')">Limpiar Entrada</button>
-    </div>
-    <div id="conteoVocales" class="section">
-      <input type="text" id="fraseConteo" placeholder="Escribe una frase">
-      <div class="output" id="resultadoConteo"></div>
-      <button onclick="contarVocales()">Contar Vocales</button>
-      <button onclick="limpiar('fraseConteo','resultadoConteo')">Limpiar Entrada</button>
     </div>
   </div>
   <div class="column">
