@@ -50,14 +50,23 @@ function cargarContenido() {
   xhr.onreadystatechange = () => {
     document.getElementById('estado').textContent = xhr.readyState + " - " + xhr.statusText;
     if (xhr.readyState === 4) {
-      document.getElementById('contenido').textContent = xhr.responseText;
+      const respuesta = xhr.responseText;
+      try {
+        // Intenta formatear como JSON
+        const json = JSON.parse(respuesta);
+        document.getElementById('contenido').textContent = JSON.stringify(json, null, 2);
+      } catch (e) {
+        // Si no es JSON, muestra como HTML
+        document.getElementById('contenido').innerHTML = respuesta;
+      }
       document.getElementById('codigo').textContent = xhr.status + ' - ' + xhr.statusText;
-      let headers = xhr.getAllResponseHeaders().trim().split(/\r?\n/).join('\n');
+      const headers = xhr.getAllResponseHeaders().trim().split(/\r?\n/).join('\n');
       document.getElementById('cabeceras').textContent = headers;
     }
   };
   xhr.send();
 }
+
 
 function limpiarAjax() {
   document.getElementById('url').value = '';
