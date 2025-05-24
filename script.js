@@ -1,3 +1,4 @@
+
 function verificarPalindromo() {
   const texto = document.getElementById('input-palindromo').value.toLowerCase().replace(/[^a-z0-9áéíóú]/gi, '');
   const resultado = texto === texto.split('').reverse().join('');
@@ -8,7 +9,7 @@ function compararNumeros() {
   const n1 = Number(document.getElementById('num1').value);
   const n2 = Number(document.getElementById('num2').value);
   let resultado = "";
-  
+
   if (!isNaN(n1) && !isNaN(n2)) {
     if (n1 > n2) resultado = `El número mayor es ${n1}`;
     else if (n2 > n1) resultado = `El número mayor es ${n2}`;
@@ -29,7 +30,7 @@ function mostrarVocales() {
 function contarVocales() {
   const frase = document.getElementById('input-frase').value.toLowerCase();
   const conteo = { a: 0, e: 0, i: 0, o: 0, u: 0, á: 0, é: 0, í: 0, ó: 0, ú: 0 };
-  
+
   for (let letra of frase) {
     if (conteo.hasOwnProperty(letra)) {
       conteo[letra]++;
@@ -79,4 +80,31 @@ function mostrarContenido() {
   xhr.onerror = () => alert("Error en la solicitud");
 
   xhr.send();
+}
+
+
+// Funciones de limpieza para cada ejercicio
+function limpiarPalindromo() {
+  document.getElementById('input-palindromo').value = '';
+  document.getElementById('resultado-palindromo').textContent = '';
+}
+
+function limpiarCompararNumeros() {
+  document.getElementById('num1').value = '';
+  document.getElementById('num2').value = '';
+  document.getElementById('resultado-mayor').textContent = '';
+}
+
+function limpiarVocales() {
+  document.getElementById('input-frase').value = '';
+  document.getElementById('vocales').textContent = '';
+  document.getElementById('conteo-vocales').textContent = '';
+}
+
+function limpiarAjax() {
+  document.getElementById('url').value = '';
+  document.getElementById('estado-peticion').textContent = '';
+  document.getElementById('contenido').textContent = '';
+  document.getElementById('cabeceras').textContent = '';
+  document.getElementById('codigo-respuesta').textContent = '';
 }
