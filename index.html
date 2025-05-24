@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laboratorio JS y AJAX</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicios Interactivos: JavaScript y AJAX</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <h1>Laboratorio de JavaScript y AJAX</h1>
-
-    <section>
-      <h2>Ejercicios JavaScript</h2>
-
-      <div>
-        <label for="input-palindromo">Palabra:</label>
-        <input id="input-palindromo" type="text" placeholder="Ingresa una palabra" />
-        <button onclick="verificarPalindromo()">Verificar Palíndromo</button>
-        <button onclick="limpiarPalindromo()">Limpiar</button>
-        <p id="resultado-palindromo" aria-live="polite"></p>
-      </div>
-
-      <div>
-        <label for="num1">Número 1:</label>
-        <input id="num1" type="number" placeholder="Número 1" />
-        <label for="num2">Número 2:</label>
-        <input id="num2" type="number" placeholder="Número 2" />
-        <button onclick="compararNumeros()">Comparar</button>
-        <button onclick="limpiarCompararNumeros()">Limpiar</button>
-        <p id="resultado-mayor" aria-live="polite"></p>
-      </div>
-
-      <div>
-        <label for="input-frase">Frase:</label>
-        <input id="input-frase" type="text" placeholder="Ingresa una frase" />
-        <button onclick="mostrarVocales()">Vocales</button>
-        <button onclick="contarVocales()">Contar Vocales</button>
-        <button onclick="limpiarVocales()">Limpiar</button>
-        <p id="vocales" aria-live="polite"></p>
-        <p id="conteo-vocales" aria-live="polite"></p>
-      </div>
-    </section>
-
-    <section>
-      <h2>AJAX</h2>
-      <label for="url">URL a consultar:</label>
-      <input id="url" type="text" placeholder="https://jsonplaceholder.typicode.com/posts/1" />
-      <button onclick="mostrarContenido()">Mostrar Contenidos</button>
-      <button onclick="limpiarAjax()">Limpiar</button>
-      <div id="estado-peticion" aria-live="polite"></div>
-      <div id="contenido"></div>
-      <div id="cabeceras"></div>
-      <div id="codigo-respuesta"></div>
-    </section>
-  </main>
-
-  <script src="script.js" defer></script>
+  <div class="column">
+    <h2>Ejercicios con JavaScript</h2>
+    <div class="buttons">
+      <button onclick="showSection('palindromo')">¿Es un Palíndromo?</button>
+      <button onclick="showSection('mayor')">Comparar dos Números</button>
+      <button onclick="showSection('vocales')">Detectar Vocales</button>
+      <button onclick="showSection('conteoVocales')">Contar Vocales</button>
+    </div>
+    <div id="palindromo" class="section">
+      <input type="text" id="palabra" placeholder="Escribe una palabra">
+      <div class="output" id="resultadoPalindromo"></div>
+      <button onclick="esPalindromo()">Comprobar Palíndromo</button>
+      <button onclick="limpiar('palabra','resultadoPalindromo')">Limpiar Entrada</button>
+      <button onclick="volver()">Volver al Menú</button>
+    </div>
+    <div id="mayor" class="section">
+      <input type="text" id="num1" placeholder="Primer número">
+      <input type="text" id="num2" placeholder="Segundo número">
+      <div class="output" id="resultadoMayor"></div>
+      <button onclick="compararNumeros()">Comparar Números</button>
+      <button onclick="limpiar('num1,num2','resultadoMayor')">Limpiar Entradas</button>
+      <button onclick="volver()">Volver al Menú</button>
+    </div>
+    <div id="vocales" class="section">
+      <input type="text" id="fraseVocales" placeholder="Escribe una frase">
+      <div class="output" id="resultadoVocales"></div>
+      <button onclick="mostrarVocales()">Mostrar Vocales</button>
+      <button onclick="limpiar('fraseVocales','resultadoVocales')">Limpiar Entrada</button>
+      <button onclick="volver()">Volver al Menú</button>
+    </div>
+    <div id="conteoVocales" class="section">
+      <input type="text" id="fraseConteo" placeholder="Escribe una frase">
+      <div class="output" id="resultadoConteo"></div>
+      <button onclick="contarVocales()">Contar Vocales</button>
+      <button onclick="limpiar('fraseConteo','resultadoConteo')">Limpiar Entrada</button>
+      <button onclick="volver()">Volver al Menú</button>
+    </div>
+  </div>
+  <div class="column">
+    <h2>Ejercicios con AJAX</h2>
+    <input type="text" id="url" value="" placeholder="Ingrese una URL">
+    <button onclick="cargarContenido()">Mostrar Contenido de la URL</button>
+    <h3>Contenido Obtenido</h3>
+    <div class="output" id="contenido"></div>
+    <h3>Estado de la Petición</h3>
+    <div class="output" id="estado"></div>
+    <h3>Cabeceras HTTP de la Respuesta</h3>
+    <div class="output" id="cabeceras"></div>
+    <h3>Código de Estado HTTP</h3>
+    <div class="output" id="codigo"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

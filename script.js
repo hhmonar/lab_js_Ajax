@@ -1,110 +1,60 @@
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
 
-function verificarPalindromo() {
-  const texto = document.getElementById('input-palindromo').value.toLowerCase().replace(/[^a-z0-9áéíóú]/gi, '');
-  const resultado = texto === texto.split('').reverse().join('');
-  document.getElementById('resultado-palindromo').textContent = resultado ? "Es un palíndromo" : "No es un palíndromo";
+function volver() {
+  document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+}
+
+function limpiar(campos, salida) {
+  campos.split(',').forEach(id => document.getElementById(id).value = '');
+  document.getElementById(salida).textContent = '';
+}
+
+function esPalindromo() {
+  let palabra = document.getElementById('palabra').value;
+  let resultado = palabra === palabra.split('').reverse().join('') ? "Es palíndromo" : "No es palíndromo";
+  document.getElementById('resultadoPalindromo').textContent = resultado;
 }
 
 function compararNumeros() {
-  const n1 = Number(document.getElementById('num1').value);
-  const n2 = Number(document.getElementById('num2').value);
-  let resultado = "";
-
-  if (!isNaN(n1) && !isNaN(n2)) {
-    if (n1 > n2) resultado = `El número mayor es ${n1}`;
-    else if (n2 > n1) resultado = `El número mayor es ${n2}`;
-    else resultado = "Ambos números son iguales";
-  } else {
-    resultado = "Por favor, ingresa dos números válidos.";
-  }
-
-  document.getElementById('resultado-mayor').textContent = resultado;
+  let n1 = parseFloat(document.getElementById('num1').value);
+  let n2 = parseFloat(document.getElementById('num2').value);
+  let resultado = n1 > n2 ? n1 + " es mayor" : n2 > n1 ? n2 + " es mayor" : "Son iguales";
+  document.getElementById('resultadoMayor').textContent = resultado;
 }
 
 function mostrarVocales() {
-  const frase = document.getElementById('input-frase').value;
-  const vocales = frase.match(/[aeiouáéíóú]/gi);
-  document.getElementById('vocales').textContent = vocales ? [...new Set(vocales)].join(", ") : "No se encontraron vocales.";
+  let frase = document.getElementById('fraseVocales').value.toLowerCase();
+  let vocales = frase.match(/[aeiou]/g);
+  document.getElementById('resultadoVocales').textContent = vocales ? [...new Set(vocales)].join(', ') : "No hay vocales";
 }
 
 function contarVocales() {
-  const frase = document.getElementById('input-frase').value.toLowerCase();
-  const conteo = { a: 0, e: 0, i: 0, o: 0, u: 0, á: 0, é: 0, í: 0, ó: 0, ú: 0 };
-
-  for (let letra of frase) {
-    if (conteo.hasOwnProperty(letra)) {
-      conteo[letra]++;
-    }
-  }
-
-  const resultado = Object.entries(conteo)
-    .filter(([_, valor]) => valor > 0)
-    .map(([letra, valor]) => `${letra}: ${valor}`)
-    .join(", ");
-
-  document.getElementById('conteo-vocales').textContent = resultado;
+  let frase = document.getElementById('fraseConteo').value.toLowerCase();
+  let conteo = { a: 0, e: 0, i: 0, o: 0, u: 0 };
+  for (let c of frase) if (conteo.hasOwnProperty(c)) conteo[c]++;
+  let resultado = Object.entries(conteo).map(([v, c]) => `${v}: ${c}`).join(', ');
+  document.getElementById('resultadoConteo').textContent = resultado;
 }
 
-function mostrarContenido() {
-  const urlInput = document.getElementById('url');
-  const url = urlInput.value.trim() || "https://jsonplaceholder.typicode.com/posts/1";
+window.onload = () => {
+  document.getElementById('url').value = window.location.href;
+}
 
-  if (urlInput.value.trim() === "") {
-    urlInput.value = url;
-  }
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-
-  xhr.onreadystatechange = function () {
-    const estados = ["No iniciada", "Conexión establecida", "Recibiendo", "Completada"];
-    document.getElementById("estado-peticion").textContent = `Estado: ${estados[xhr.readyState] || "Desconocido"}`;
-
+function cargarContenido() {
+  let url = document.getElementById('url').value;
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = () => {
+    document.getElementById('estado').textContent = xhr.readyState + " - " + xhr.statusText;
     if (xhr.readyState === 4) {
-      const contenido = document.getElementById("contenido");
-      const cabeceras = document.getElementById("cabeceras");
-      const codigoRespuesta = document.getElementById("codigo-respuesta");
-
-      codigoRespuesta.textContent = `Código: ${xhr.status} ${xhr.statusText}`;
-      cabeceras.textContent = xhr.getAllResponseHeaders();
-
-      try {
-        const json = JSON.parse(xhr.responseText);
-        contenido.textContent = JSON.stringify(json, null, 2);  // Formato bonito
-      } catch (e) {
-        contenido.innerHTML = xhr.responseText;  // Mostrar como HTML
-      }
+      document.getElementById('contenido').textContent = xhr.responseText;
+      document.getElementById('codigo').textContent = xhr.status + ' - ' + xhr.statusText;
+      let headers = xhr.getAllResponseHeaders().trim().split(/\r?\n/).join('\n');
+      document.getElementById('cabeceras').textContent = headers;
     }
   };
-
-  xhr.onerror = () => alert("Error en la solicitud");
-
   xhr.send();
-}
-
-
-// Funciones de limpieza para cada ejercicio
-function limpiarPalindromo() {
-  document.getElementById('input-palindromo').value = '';
-  document.getElementById('resultado-palindromo').textContent = '';
-}
-
-function limpiarCompararNumeros() {
-  document.getElementById('num1').value = '';
-  document.getElementById('num2').value = '';
-  document.getElementById('resultado-mayor').textContent = '';
-}
-
-function limpiarVocales() {
-  document.getElementById('input-frase').value = '';
-  document.getElementById('vocales').textContent = '';
-  document.getElementById('conteo-vocales').textContent = '';
-}
-
-function limpiarAjax() {
-  document.getElementById('url').value = '';
-  document.getElementById('estado-peticion').textContent = '';
-  document.getElementById('contenido').textContent = '';
-  document.getElementById('cabeceras').textContent = '';
-  document.getElementById('codigo-respuesta').textContent = '';
 }
