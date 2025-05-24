@@ -27,10 +27,14 @@ body {
   display: none;
   margin-top: 20px;
 }
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
 .buttons button,
 button {
-  display: inline-block;
-  margin: 5px 5px 10px 0;
   padding: 10px 16px;
   background-color: #007bff;
   color: white;
@@ -41,7 +45,9 @@ button {
   font-weight: 500;
   transition: background-color 0.3s ease, transform 0.2s ease;
   white-space: nowrap;
-  width: auto;
+  flex: 1 1 calc(50% - 10px);
+  box-sizing: border-box;
+  text-align: center;
 }
 button:hover {
   background-color: #0056b3;
