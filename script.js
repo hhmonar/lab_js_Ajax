@@ -21,20 +21,18 @@ function compararNumeros() {
   document.getElementById('resultadoMayor').textContent = resultado;
 }
 
-function analizarVocales() {
+function mostrarVocales() {
   let frase = document.getElementById('fraseVocales').value.toLowerCase();
-  let vocalesEncontradas = frase.match(/[aeiou]/g);
+  let vocales = frase.match(/[aeiou]/g);
+  document.getElementById('resultadoVocales').textContent = vocales ? [...new Set(vocales)].join(', ') : "No hay vocales";
+}
+
+function contarVocales() {
+  let frase = document.getElementById('fraseConteo').value.toLowerCase();
   let conteo = { a: 0, e: 0, i: 0, o: 0, u: 0 };
-  if (vocalesEncontradas) {
-    for (let v of vocalesEncontradas) conteo[v]++;
-    let distintas = [...new Set(vocalesEncontradas)].join(', ');
-    let resumen = Object.entries(conteo)
-      .filter(([v, c]) => c > 0)
-      .map(([v, c]) => `${v}: ${c}`).join(', ');
-    document.getElementById('resultadoVocales').textContent = `Vocales encontradas: ${distintas}\nConteo: ${resumen}`;
-  } else {
-    document.getElementById('resultadoVocales').textContent = "No se encontraron vocales.";
-  }
+  for (let c of frase) if (conteo.hasOwnProperty(c)) conteo[c]++;
+  let resultado = Object.entries(conteo).map(([v, c]) => `${v}: ${c}`).join(', ');
+  document.getElementById('resultadoConteo').textContent = resultado;
 }
 
 function cargarContenido() {
