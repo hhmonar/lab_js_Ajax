@@ -33,7 +33,7 @@ function contarVocales() {
   for (let c of frase) if (conteo.hasOwnProperty(c)) conteo[c]++;
   let vocalesEncontradas = Object.entries(conteo).filter(([_, c]) => c > 0).map(([v]) => v).join(', ');
   let resumen = Object.entries(conteo).filter(([_, c]) => c > 0).map(([v, c]) => `${v}: ${c}`).join(', ');
-  document.getElementById('resultadoConteo').textContent = `Vocales encontradas: ${vocalesEncontradas}\nConteo: ${resumen}`;
+  document.getElementById('resultadoConteo').innerHTML = `Vocales encontradas: ${vocalesEncontradas}<br>Conteo: ${resumen}`;
 }
 
 function cargarContenido() {
