@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio JS y AJAX</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Laboratorio de JavaScript y AJAX</h1>
+
+    <section>
+      <h2>Ejercicios JavaScript</h2>
+
+      <div>
+        <label for="input-palindromo">Palabra:</label>
+        <input id="input-palindromo" type="text" placeholder="Ingresa una palabra" />
+        <button onclick="verificarPalindromo()">Verificar Palíndromo</button>
+        <p id="resultado-palindromo" aria-live="polite"></p>
+      </div>
+
+      <div>
+        <label for="num1">Número 1:</label>
+        <input id="num1" type="number" placeholder="Número 1" />
+        <label for="num2">Número 2:</label>
+        <input id="num2" type="number" placeholder="Número 2" />
+        <button onclick="compararNumeros()">Comparar</button>
+        <p id="resultado-mayor" aria-live="polite"></p>
+      </div>
+
+      <div>
+        <label for="input-frase">Frase:</label>
+        <input id="input-frase" type="text" placeholder="Ingresa una frase" />
+        <button onclick="mostrarVocales()">Vocales</button>
+        <button onclick="contarVocales()">Contar Vocales</button>
+        <p id="vocales" aria-live="polite"></p>
+        <p id="conteo-vocales" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>AJAX</h2>
+      <label for="url">URL a consultar:</label>
+      <input id="url" type="text" placeholder="https://ejemplo.com" />
+      <button onclick="mostrarContenido()">Mostrar Contenidos</button>
+      <div id="estado-peticion" aria-live="polite"></div>
+      <div id="contenido"></div>
+      <div id="cabeceras"></div>
+      <div id="codigo-respuesta"></div>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+
+/* Tipografía clara y legible */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 2em;
+  background-color: #f5f7fa;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Estilos de entrada y botones */
+input, button {
+  margin: 0.5em 0;
+  padding: 0.6em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botón con buen contraste y enfoque */
+button {
+  background-color: #005a9c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover,
+button:focus {
+  background-color: #00467c;
+  outline: none;
+}
+
+/* Contenedor de secciones */
+section {
+  margin-bottom: 2em;
+  padding: 1.5em;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Etiquetas accesibles */
+label {
+  display: block;
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+/* Área de resultados */
+#resultado-palindromo,
+#resultado-mayor,
+#vocales,
+#conteo-vocales,
+#estado-peticion,
+#contenido,
+#cabeceras,
+#codigo-respuesta {
+  margin-top: 0.5em;
+  background-color: #eef;
+  padding: 0.5em;
+  border-left: 4px solid #0078d4;
+  border-radius: 4px;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
