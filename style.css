@@ -7,12 +7,14 @@ body {
   background-color: #f8f9fa;
   color: #333;
 }
+
 .column {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
   border-bottom: 1px solid #ccc;
 }
+
 @media (min-width: 768px) {
   .column {
     width: 50%;
@@ -23,16 +25,19 @@ body {
     border-right: none;
   }
 }
+
 .section {
   display: none;
   margin-top: 20px;
 }
+
 .buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-start;
 }
+
 .buttons button,
 button {
   background-color: #007bff;
@@ -46,10 +51,12 @@ button {
   white-space: nowrap;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
 button:hover {
   background-color: #0056b3;
   transform: scale(1.02);
 }
+
 textarea,
 input[type="text"] {
   width: 100%;
@@ -61,6 +68,7 @@ input[type="text"] {
   box-sizing: border-box;
   background-color: #fff;
 }
+
 .output {
   border: 1px solid #ccc;
   background-color: #fff;
