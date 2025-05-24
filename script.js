@@ -58,3 +58,15 @@ function cargarContenido() {
   };
   xhr.send();
 }
+
+function limpiarAjax() {
+  document.getElementById('url').value = '';
+  document.getElementById('contenido').textContent = '';
+  document.getElementById('estado').textContent = '';
+  document.getElementById('cabeceras').textContent = '';
+  document.getElementById('codigo').textContent = '';
+}
+
+window.onload = () => {
+  document.getElementById('url').value = window.location.href;
+};
