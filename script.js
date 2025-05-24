@@ -49,7 +49,7 @@ function mostrarContenido() {
   const url = urlInput.value.trim() || "https://jsonplaceholder.typicode.com/posts/1";
 
   if (urlInput.value.trim() === "") {
-    urlInput.value = url; // actualizar el campo si estaba vacío
+    urlInput.value = url;
   }
 
   const xhr = new XMLHttpRequest();
@@ -60,14 +60,18 @@ function mostrarContenido() {
     document.getElementById("estado-peticion").textContent = `Estado: ${estados[xhr.readyState] || "Desconocido"}`;
 
     if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        document.getElementById("contenido").textContent = xhr.responseText;
-        document.getElementById("codigo-respuesta").textContent = `Código: ${xhr.status} ${xhr.statusText}`;
-        document.getElementById("cabeceras").textContent = xhr.getAllResponseHeaders();
-      } else {
-        document.getElementById("contenido").textContent = "⚠️ Error: No se pudo cargar la URL (¿CORS?). Prueba con una API pública.";
-        document.getElementById("codigo-respuesta").textContent = `Código: ${xhr.status} ${xhr.statusText}`;
-        document.getElementById("cabeceras").textContent = "";
+      const contenido = document.getElementById("contenido");
+      const cabeceras = document.getElementById("cabeceras");
+      const codigoRespuesta = document.getElementById("codigo-respuesta");
+
+      codigoRespuesta.textContent = `Código: ${xhr.status} ${xhr.statusText}`;
+      cabeceras.textContent = xhr.getAllResponseHeaders();
+
+      try {
+        const json = JSON.parse(xhr.responseText);
+        contenido.textContent = JSON.stringify(json, null, 2);  // Formato bonito
+      } catch (e) {
+        contenido.innerHTML = xhr.responseText;  // Mostrar como HTML
       }
     }
   };
