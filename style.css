@@ -1,82 +1,145 @@
+/* style.css */
 body {
   display: flex;
-  flex-wrap: wrap;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f8f9fa;
+  background: #f4f6f8;
   color: #333;
 }
-.column {
-  width: 100%;
+.panel {
+  flex: 1;
   padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
   box-sizing: border-box;
 }
-@media (min-width: 768px) {
-  .column {
-    width: 50%;
-    border-right: 1px solid #ccc;
-  }
-  .column:last-child {
-    border-right: none;
-  }
+.panel.js {
+  background: #ffffff;
+  border-right: 2px solid #e0e0e0;
 }
-.section {
-  display: none;
+.panel.ajax {
+  background: #f9f9f9;
+}
+.seccion {
   margin-top: 20px;
+  padding: 15px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
-.buttons {
+.hidden {
+  display: none;
+}
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  background: #007bff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: #0056b3;
+}
+input[type="text"],
+input[type="number"] {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+h2, h3 {
+  color: #222;
+}
+pre, .ajax-box, #estado, #cabeceras, #codigoEstado {
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  min-height: 50px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+#contenido {
+  height: 200px;
+  overflow-y: scroll;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.botonera {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-start;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
+
+/* Resultado visual */
+.resultado-ok {
+  color: green;
+  font-weight: bold;
+}
+
+.resultado-error {
+  color: red;
+  font-weight: bold;
+}
+
+.resultado-warning {
+  color: #ffa500;
+  font-weight: bold;
+}
+
+/* Transiciones suaves */
+.seccion p {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .panel {
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+/* Separadores visuales */
+.seccion:not(:last-child) {
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 25px;
+}
+
+/* Mejora en pre y contenido AJAX */
+pre, #contenido {
+  font-family: 'Courier New', monospace;
+}
+
+/* Botones más modernos */
 button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 10px 16px;
-  white-space: nowrap;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-button:hover {
-  background-color: #0056b3;
-  transform: scale(1.02);
-}
-textarea,
-input[type="text"] {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-  background-color: #fff;
-}
-.output {
-  border: 1px solid #ccc;
-  background-color: #fff;
-  padding: 12px;
-  min-height: 50px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
-  font-size: 15px;
-  line-height: 1.4;
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
+
+button:active {
+  transform: scale(0.97);
 }

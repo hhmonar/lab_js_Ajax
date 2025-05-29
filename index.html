@@ -1,59 +1,87 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ejercicios Interactivos: JavaScript y AJAX</title>
+  <title>Ejercicios JS y AJAX</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="column">
-    <h2>Ejercicios con JavaScript</h2>
-    <div class="buttons">
-      <button onclick="showSection('palindromo')">¿Es un Palíndromo?</button>
-      <button onclick="showSection('mayor')">Comparar dos Números</button>
-      <button onclick="showSection('vocales')">Detectar Vocales</button>
-      <button onclick="showSection('conteoVocales')">Contar Vocales</button>
+  <div class="panel js" id="jsPanel">
+    <h2>JavaScript</h2>
+    <button onclick="mostrarSeccion('palindromo')">Palíndromo</button>
+    <button onclick="mostrarSeccion('mayor')">Número mayor</button>
+    <button onclick="mostrarSeccion('vocales')">Vocales en frase</button>
+    <button onclick="mostrarSeccion('conteoVocales')">Conteo de vocales</button>
+
+    <div id="palindromo" class="seccion hidden">
+      <label for="palabra">Palabra:</label>
+      <input type="text" id="palabra" placeholder="Ingresa una palabra">
+      <div class="botonera">
+        <button onclick="verificarPalindromo()">Verificar</button>
+        <button onclick="limpiarEntrada('palabra', 'resultadoPalindromo')">Limpiar</button>
+        <button onclick="volver()">Atrás</button>
+      </div>
+      <p id="resultadoPalindromo" aria-live="polite"></p>
     </div>
-    <div id="palindromo" class="section">
-      <input type="text" id="palabra" placeholder="Escribe una palabra">
-      <div class="output" id="resultadoPalindromo"></div>
-      <button onclick="esPalindromo()">Comprobar Palíndromo</button>
-      <button onclick="limpiar('palabra','resultadoPalindromo')">Limpiar Entrada</button>
+
+    <div id="mayor" class="seccion hidden">
+      <label for="num1">Número 1:</label>
+      <input type="number" id="num1" placeholder="Número 1">
+      <label for="num2">Número 2:</label>
+      <input type="number" id="num2" placeholder="Número 2">
+      <div class="botonera">
+        <button onclick="mostrarMayor()">Comparar</button>
+        <button onclick="limpiarEntradaMultiple(['num1', 'num2'], 'resultadoMayor')">Limpiar</button>
+        <button onclick="volver()">Atrás</button>
+      </div>
+      <p id="resultadoMayor" aria-live="polite"></p>
     </div>
-    <div id="mayor" class="section">
-      <input type="text" id="num1" placeholder="Primer número">
-      <input type="text" id="num2" placeholder="Segundo número">
-      <div class="output" id="resultadoMayor"></div>
-      <button onclick="compararNumeros()">Comparar Números</button>
-      <button onclick="limpiar('num1,num2','resultadoMayor')">Limpiar Entradas</button>
+
+    <div id="vocales" class="seccion hidden">
+      <label for="fraseVocales">Frase:</label>
+      <input type="text" id="fraseVocales" placeholder="Ingresa una frase">
+      <div class="botonera">
+        <button onclick="mostrarVocales()">Mostrar vocales</button>
+        <button onclick="limpiarEntrada('fraseVocales', 'resultadoVocales')">Limpiar</button>
+        <button onclick="volver()">Atrás</button>
+      </div>
+      <p id="resultadoVocales" aria-live="polite"></p>
     </div>
-    <div id="vocales" class="section">
-      <input type="text" id="fraseVocales" placeholder="Escribe una frase">
-      <div class="output" id="resultadoVocales"></div>
-      <button onclick="mostrarVocales()">Mostrar Vocales</button>
-      <button onclick="limpiar('fraseVocales','resultadoVocales')">Limpiar Entrada</button>
-    </div>
-    <div id="conteoVocales" class="section">
-      <input type="text" id="fraseConteo" placeholder="Escribe una frase">
-      <div class="output" id="resultadoConteo"></div>
-      <button onclick="contarVocales()">Contar Vocales</button>
-      <button onclick="limpiar('fraseConteo','resultadoConteo')">Limpiar Entrada</button>
+
+    <div id="conteoVocales" class="seccion hidden">
+      <label for="fraseConteo">Frase:</label>
+      <input type="text" id="fraseConteo" placeholder="Ingresa una frase">
+      <div class="botonera">
+        <button onclick="contarVocales()">Contar vocales</button>
+        <button onclick="limpiarEntrada('fraseConteo', 'resultadoConteo')">Limpiar</button>
+        <button onclick="volver()">Atrás</button>
+      </div>
+      <p id="resultadoConteo" aria-live="polite"></p>
     </div>
   </div>
-  <div class="column">
-    <h2>Ejercicios con AJAX</h2>
-    <input type="text" id="url" value="" placeholder="Ingrese una URL">
-    <button onclick="cargarContenido()">Mostrar Contenido de la URL</button>
-    <h3>Contenido Obtenido</h3>
-    <div class="output" id="contenido"></div>
-    <h3>Estado de la Petición</h3>
-    <div class="output" id="estado"></div>
-    <h3>Cabeceras HTTP de la Respuesta</h3>
-    <div class="output" id="cabeceras"></div>
-    <h3>Código de Estado HTTP</h3>
-    <div class="output" id="codigo"></div>
+
+  <div class="panel ajax" id="ajaxPanel">
+    <h2>AJAX</h2>
+    <label for="url">URL:</label>
+    <input type="text" id="url" value="" placeholder="URL">
+    <button onclick="mostrarContenido()">Mostrar Contenidos</button>
+    <button onclick="limpiarAJAX()">Limpiar</button>
+
+    <h3>Contenidos</h3>
+    <div id="contenido"></div>
+
+    <h3>Estados de la petición</h3>
+    <div id="estado"></div>
+
+    <h3>Cabeceras HTTP</h3>
+    <pre id="cabeceras"></pre>
+
+    <h3>Código de estado</h3>
+    <div id="codigoEstado"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
